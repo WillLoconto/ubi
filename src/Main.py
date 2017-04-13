@@ -26,7 +26,7 @@ async def on_message(message):
     if message.author == client.user:
         return
 
-    if message.content.startswith("$"):
+    if message.content.startswith(";"):
         d_ = commandHandler.handle(message)
         if d_[0] == "Single":
             for i in d_[1]:
@@ -61,7 +61,7 @@ async def on_message(message):
                         client.loop.create_task(rts.rtobj_get()[len(rts.rtobj_get()) - 1][1].music_runtime())
                         print("Success")
                     else:
-                        await client.send_message(message.channel, "```Please join a voice channel before using $music```")
+                        await client.send_message(message.channel, "```Please join a voice channel before using ;music```")
             else:
                 await client.send_message(message.channel, "```There's already have a game running on the server, end or close it to "
                                           "start a"" new one```")
@@ -75,7 +75,7 @@ async def on_message(message):
                     i[1].receive(payload=message)
                     break
 
-    if message.content.startswith("$music"):
+    if message.content.startswith(";music"):
         for i in rts.rtobj_get():
             if i[0] == message.server.id:
                 i[1].receive(message)
@@ -92,7 +92,7 @@ async def on_server_join(server):
 
 @client.event
 async def on_ready():
-    await client.change_presence(game=discord.Game(name='$help to start'))
+    await client.change_presence(game=discord.Game(name=';help for help'))
     print('Logged in as')
     print(client.user.name)
     print(client.user.id)
@@ -100,4 +100,3 @@ async def on_ready():
 
 client.loop.create_task(con.main_runtime())
 client.run('removed')
-# Always change token to removed when committing 
