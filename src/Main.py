@@ -26,7 +26,7 @@ async def on_message(message):
     if message.author == client.user:
         return
 
-    if message.content.startswith("$"):
+    if message.content.startswith(";"):
         d_ = commandHandler.handle(message)
         if d_[0] == "Single":
             for i in d_[1]:
@@ -61,10 +61,10 @@ async def on_message(message):
                         client.loop.create_task(rts.rtobj_get()[len(rts.rtobj_get()) - 1][1].music_runtime())
                         print("Success")
                     else:
-                        await client.send_message(message.channel, "```Please join a voice channel before using $music```")
+                        await client.send_message(message.channel, "Please join a voice channel before using **;music**")
             else:
-                await client.send_message(message.channel, "```There's already have a game running on the server, end or close it to "
-                                          "start a"" new one```")
+                await client.send_message(message.channel, "There's already have a game running on the server, end or close it to "
+                                          "start a"" new one")
     if message.content.startswith("^"):
         f = open("server/servers/" + str(message.server.id) + ".json", "r")
         f_ = json.loads(f.read())
@@ -75,7 +75,7 @@ async def on_message(message):
                     i[1].receive(payload=message)
                     break
 
-    if message.content.startswith("$music"):
+    if message.content.startswith(";music"):
         for i in rts.rtobj_get():
             if i[0] == message.server.id:
                 i[1].receive(message)
